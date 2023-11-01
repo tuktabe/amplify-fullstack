@@ -53,7 +53,7 @@ const App = ({ signOut }) => {
     //console.log("data");
     //console.log(data);
     
-    //if (!!data.image) await Storage.put(data.name, image);
+    if (!!data.image) await Storage.put(data.name, image);
     await API.graphql({
       query: createNoteMutation,
       variables: { input: data },
