@@ -27,10 +27,13 @@ const App = ({ signOut }) => {
   }, []);
 
   async function fetchNotes() {
+    console.log("got here in fetchNotes");
     const apiData = await API.graphql({ query: listNotes });
     const notesFromAPI = apiData.data.listNotes.items;
     await Promise.all(
       notesFromAPI.map(async (note) => {
+        console.log("note.image:");
+        console.log(note.image);
         if (note.image) {
           console.log('found image for {note.name}: {note.image}');
           const url = await Storage.get(note.name);
