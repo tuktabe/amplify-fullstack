@@ -16,7 +16,6 @@ import {
   createNote as createNoteMutation,
   deleteNote as deleteNoteMutation,
 } from "./graphql/mutations";
-
 import { API, Storage } from "aws-amplify";
 
 const App = ({ signOut }) => {
@@ -27,18 +26,13 @@ const App = ({ signOut }) => {
   }, []);
 
   async function fetchNotes() {
-    console.log("got here in fetchNotes");
     const apiData = await API.graphql({ query: listNotes });
     const notesFromAPI = apiData.data.listNotes.items;
     await Promise.all(
       notesFromAPI.map(async (note) => {
-        console.log("note.image:");
-        console.log(note.image);
         if (note.image) {
-          console.log('found image for {note.name}: {note.image}');
           const url = await Storage.get(note.name);
           note.image = url;
-          console.log('result image for {note.name}: {note.image}');
         }
         return note;
       })
@@ -55,9 +49,6 @@ const App = ({ signOut }) => {
       description: form.get("description"),
       image: image.name,
     };
-    //console.log("data");
-    //console.log(data);
-    
     if (!!data.image) await Storage.put(data.name, image);
     await API.graphql({
       query: createNoteMutation,
