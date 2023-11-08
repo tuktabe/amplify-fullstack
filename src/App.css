@@ -39,7 +39,7 @@
 }
 
 div {
-  min-height: 100vh;
+  
   text-rendering: optimizeSpeed;
   line-height: var(--amplify-line-heights-medium);
 }
