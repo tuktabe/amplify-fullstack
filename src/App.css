@@ -38,10 +38,4 @@
   }
 }
 
-div {
-  
-  text-rendering: optimizeSpeed;
-  line-height: var(--amplify-line-heights-medium);
-}
-
 
