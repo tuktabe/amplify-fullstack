@@ -32,8 +32,10 @@ const App = ({ signOut }) => {
     await Promise.all(
       notesFromAPI.map(async (note) => {
         if (note.image) {
+          console.log('found image for {note.name}: {note.image}');
           const url = await Storage.get(note.name);
           note.image = url;
+          console.log('result image for {note.name}: {note.image}');
         }
         return note;
       })
